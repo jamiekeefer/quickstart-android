@@ -13,6 +13,7 @@
 // limitations under the License.
 package com.google.firebase.samples.apps.mlkit.java;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -55,6 +56,13 @@ public final class ChooserActivity extends AppCompatActivity
         R.string.desc_camera_source_activity, R.string.desc_still_image_activity,
       };
 
+  public static String scannedBarcode = "";
+  public static final String EXTRA_MESSAGE = "com.google.firebase.samples.apps.mlkit.java.barcodescanning.MESSAGE";
+
+  private Context mContext;
+  private Activity mActivity;
+  private View mView;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -70,6 +78,12 @@ public final class ChooserActivity extends AppCompatActivity
 
     listView.setAdapter(adapter);
     listView.setOnItemClickListener(this);
+
+    mContext = getApplicationContext();
+    mActivity = ChooserActivity.this;
+    mView = findViewById(android.R.id.content);
+
+    System.out.println("mContext: " + mContext + "mActivity: " + mActivity + "mView: " + mView);
 
     if (!allPermissionsGranted()) {
       getRuntimePermissions();
@@ -163,5 +177,18 @@ public final class ChooserActivity extends AppCompatActivity
     public void setDescriptionIds(int[] descriptionIds) {
       this.descriptionIds = descriptionIds;
     }
+  }
+
+  public void readySend() {
+    System.out.println("barcode value in ChooserActivity: " + scannedBarcode);
+    System.out.println("mContext: " + mContext + " mActivity: " + mActivity + " mView: " + mView);
+    launchSendScannedBarcode();
+  }
+
+  public void launchSendScannedBarcode() {
+    Intent intent = new Intent(this, SendScannedBarcode.class);
+    String message = scannedBarcode;
+    intent.putExtra(EXTRA_MESSAGE, message);
+    startActivity(intent);
   }
 }

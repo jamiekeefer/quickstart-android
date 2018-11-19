@@ -13,7 +13,11 @@
 // limitations under the License.
 package com.google.firebase.samples.apps.mlkit.java;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -69,12 +73,24 @@ public final class LivePreviewActivity extends AppCompatActivity
   private GraphicOverlay graphicOverlay;
   private String selectedModel = FACE_CONTOUR;
 
-  @Override
+    public static String scannedBarcode = "";
+    public static final String EXTRA_MESSAGE = "com.google.firebase.samples.apps.mlkit.java.barcodescanning.MESSAGE";
+
+    private Context mContext;
+    private Activity mActivity;
+    private View mView;
+
+    @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.d(TAG, "onCreate");
 
     setContentView(R.layout.activity_live_preview);
+        mContext = getApplicationContext();
+        mActivity = LivePreviewActivity.this;
+        mView = findViewById(android.R.id.content);
+
+        System.out.println("mContext: " + mContext + "mActivity: " + mActivity + "mView: " + mView);
 
     preview = (CameraSourcePreview) findViewById(R.id.firePreview);
     if (preview == null) {
@@ -293,4 +309,19 @@ public final class LivePreviewActivity extends AppCompatActivity
     Log.i(TAG, "Permission NOT granted: " + permission);
     return false;
   }
+
+    public void readySend() {
+        System.out.println("barcode value in LivePreviewActivity: " + scannedBarcode);
+        System.out.println("mContext: " + mContext + " mActivity: " + mActivity + " mView: " + mView);
+        launchSendScannedBarcode();
+
+    }
+
+    public void launchSendScannedBarcode() {
+        Intent intent = new Intent(this, SendScannedBarcode.class);
+        String message = scannedBarcode;
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
 }

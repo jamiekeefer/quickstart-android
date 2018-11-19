@@ -13,21 +13,27 @@
 // limitations under the License.
 package com.google.firebase.samples.apps.mlkit.java.barcodescanning;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.samples.apps.mlkit.R;
 import com.google.firebase.samples.apps.mlkit.common.CameraImageGraphic;
 import com.google.firebase.samples.apps.mlkit.common.FrameMetadata;
 import com.google.firebase.samples.apps.mlkit.common.GraphicOverlay;
+import com.google.firebase.samples.apps.mlkit.java.ChooserActivity;
+import com.google.firebase.samples.apps.mlkit.java.LivePreviewActivity;
+import com.google.firebase.samples.apps.mlkit.java.SendScannedBarcode;
 import com.google.firebase.samples.apps.mlkit.java.VisionProcessorBase;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -37,15 +43,14 @@ import java.util.List;
 public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseVisionBarcode>> {
 
     private static final String TAG = "BarcodeScanProc";
-
     private final FirebaseVisionBarcodeDetector detector;
 
     public BarcodeScanningProcessor() {
         // Note that if you know which format of barcode your app is dealing with, detection will be
         // faster to specify the supported barcode formats one by one, e.g.
         // new FirebaseVisionBarcodeDetectorOptions.Builder()
-        //     .setBarcodeFormats(FirebaseVisionBarcode.FORMAT_QR_CODE)
-        //     .build();
+        // .setBarcodeFormats(FirebaseVisionBarcode.FORMAT_QR_CODE)
+        // .build();
         detector = FirebaseVision.getInstance().getVisionBarcodeDetector();
     }
 
@@ -69,7 +74,8 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
             @NonNull List<FirebaseVisionBarcode> barcodes,
             @NonNull FrameMetadata frameMetadata,
             @NonNull GraphicOverlay graphicOverlay) {
-        graphicOverlay.clear();
+            graphicOverlay.clear();
+
         if (originalCameraImage != null) {
             CameraImageGraphic imageGraphic = new CameraImageGraphic(graphicOverlay, originalCameraImage);
             graphicOverlay.add(imageGraphic);
@@ -78,7 +84,22 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
             FirebaseVisionBarcode barcode = barcodes.get(i);
             BarcodeGraphic barcodeGraphic = new BarcodeGraphic(graphicOverlay, barcode);
             graphicOverlay.add(barcodeGraphic);
+
+
+            System.out.println(barcode.getRawValue());
+            if (!barcode.getRawValue().equals("") ) {
+
+                System.out.println("Got the number:" + barcode.getRawValue());
+
+                //create instance of SendScannedBarcode Activity
+                ChooserActivity sender = new ChooserActivity();
+                sender.scannedBarcode = barcode.getRawValue();
+
+                sender.readySend();
+
+            }
         }
+        System.out.println("In loop out of for statement");
         graphicOverlay.postInvalidate();
     }
 
@@ -86,4 +107,13 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
     protected void onFailure(@NonNull Exception e) {
         Log.e(TAG, "Barcode detection failed " + e);
     }
+
+//    public void launchSendScannedBarcode(View view) {
+//    Intent intent = new Intent(this, SendScannedBarcode.class);
+//    String message = scannedBarcode;
+//    intent.putExtra(EXTRA_MESSAGE, message);
+//    startActivity(intent);
+//   }
+
+
 }

@@ -67,5 +67,9 @@ public class BarcodeGraphic extends Graphic {
 
     // Renders the barcode at the bottom of the box.
     canvas.drawText(barcode.getRawValue(), rect.left, rect.bottom, barcodePaint);
+
   }
+
+
+
 }

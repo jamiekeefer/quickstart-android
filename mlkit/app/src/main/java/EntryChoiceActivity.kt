@@ -16,8 +16,7 @@ class EntryChoiceActivity : BaseEntryChoiceActivity() {
                 Choice(
                         "Kotlin",
                         "Run the Firebase ML Kit quickstart written in Kotlin.",
-                        Intent(
-                                this,
+                        Intent(this,
                                 com.google.firebase.samples.apps.mlkit.kotlin.ChooserActivity::class.java))
         )
     }
