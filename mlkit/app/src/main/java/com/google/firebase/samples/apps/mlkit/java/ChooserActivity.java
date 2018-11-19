@@ -179,16 +179,4 @@ public final class ChooserActivity extends AppCompatActivity
     }
   }
 
-  public void readySend() {
-    System.out.println("barcode value in ChooserActivity: " + scannedBarcode);
-    System.out.println("mContext: " + mContext + " mActivity: " + mActivity + " mView: " + mView);
-    launchSendScannedBarcode();
-  }
-
-  public void launchSendScannedBarcode() {
-    Intent intent = new Intent(this, SendScannedBarcode.class);
-    String message = scannedBarcode;
-    intent.putExtra(EXTRA_MESSAGE, message);
-    startActivity(intent);
-  }
 }

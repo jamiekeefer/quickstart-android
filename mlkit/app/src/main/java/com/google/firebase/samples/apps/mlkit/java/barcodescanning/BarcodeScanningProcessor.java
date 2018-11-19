@@ -13,6 +13,8 @@
 // limitations under the License.
 package com.google.firebase.samples.apps.mlkit.java.barcodescanning;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
@@ -44,6 +46,11 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
 
     private static final String TAG = "BarcodeScanProc";
     private final FirebaseVisionBarcodeDetector detector;
+
+    public static String scannedBarcode = "";
+    public static final String EXTRA_MESSAGE = "com.google.firebase.samples.apps.mlkit.java.barcodescanning.MESSAGE";
+
+    private Context mContext;
 
     public BarcodeScanningProcessor() {
         // Note that if you know which format of barcode your app is dealing with, detection will be
@@ -85,19 +92,21 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
             BarcodeGraphic barcodeGraphic = new BarcodeGraphic(graphicOverlay, barcode);
             graphicOverlay.add(barcodeGraphic);
 
-
             System.out.println(barcode.getRawValue());
+
             if (!barcode.getRawValue().equals("") ) {
 
-                System.out.println("Got the number:" + barcode.getRawValue());
+                System.out.println("Got the number:" + barcode.getRawValue() + " Context: " + mContext);
 
-                //create instance of SendScannedBarcode Activity
-                ChooserActivity sender = new ChooserActivity();
-                sender.scannedBarcode = barcode.getRawValue();
+                //enter code to start activity
 
-                sender.readySend();
-
+                    Intent intent = new Intent(mContext, SendScannedBarcode.class);
+                    String message = scannedBarcode;
+                    intent.putExtra(EXTRA_MESSAGE, message);
+                    mContext.startActivity(intent);
             }
+
+
         }
         System.out.println("In loop out of for statement");
         graphicOverlay.postInvalidate();

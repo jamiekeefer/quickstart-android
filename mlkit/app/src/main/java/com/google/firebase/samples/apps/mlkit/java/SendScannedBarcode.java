@@ -53,22 +53,6 @@ public class SendScannedBarcode extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-//        mContext = getApplicationContext();
-//        mActivity = SendScannedBarcode.this;
-//        mView = findViewById(android.R.id.content);
-//        System.out.println("barcode value in SendScannedValue: " + scannedBarcode);
-//        System.out.println("mContext: " + mContext + "mActivity: " + mActivity + "mView: " + mView);
     }
-
-
-
-//    public void launchSendScannedBarcode(View view) {
-//        Intent intent = new Intent(this, SendScannedBarcode.class);
-//        String message = scannedBarcode;
-//        intent.putExtra(EXTRA_MESSAGE, message);
-//        startActivity(intent);
-//    }
-
-
 
 }
