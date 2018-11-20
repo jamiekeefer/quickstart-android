@@ -89,7 +89,9 @@ public final class LivePreviewActivity extends AppCompatActivity
       Log.d(TAG, "graphicOverlay is null");
     }
 
-    Spinner spinner = (Spinner) findViewById(R.id.spinner);
+    BarcodeScanningProcessor bsp = new BarcodeScanningProcessor(getApplicationContext);
+
+      Spinner spinner = (Spinner) findViewById(R.id.spinner);
     List<String> options = new ArrayList<>();
     options.add(FACE_CONTOUR);
     options.add(FACE_DETECTION);

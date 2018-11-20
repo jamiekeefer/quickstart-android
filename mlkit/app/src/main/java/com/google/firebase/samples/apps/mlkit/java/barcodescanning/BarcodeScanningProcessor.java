@@ -52,13 +52,14 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
 
     private Context mContext;
 
-    public BarcodeScanningProcessor() {
+    public BarcodeScanningProcessor(Context context) {
         // Note that if you know which format of barcode your app is dealing with, detection will be
         // faster to specify the supported barcode formats one by one, e.g.
         // new FirebaseVisionBarcodeDetectorOptions.Builder()
         // .setBarcodeFormats(FirebaseVisionBarcode.FORMAT_QR_CODE)
         // .build();
         detector = FirebaseVision.getInstance().getVisionBarcodeDetector();
+        this.mContext = context;
     }
 
     @Override
@@ -116,13 +117,5 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
     protected void onFailure(@NonNull Exception e) {
         Log.e(TAG, "Barcode detection failed " + e);
     }
-
-//    public void launchSendScannedBarcode(View view) {
-//    Intent intent = new Intent(this, SendScannedBarcode.class);
-//    String message = scannedBarcode;
-//    intent.putExtra(EXTRA_MESSAGE, message);
-//    startActivity(intent);
-//   }
-
 
 }
