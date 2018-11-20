@@ -50,7 +50,7 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
     public static String scannedBarcode = "";
     public static final String EXTRA_MESSAGE = "com.google.firebase.samples.apps.mlkit.java.barcodescanning.MESSAGE";
 
-    private Context mContext;
+    private Context mContext = LivePreviewActivity.getContext();
 
     public BarcodeScanningProcessor() {
         // Note that if you know which format of barcode your app is dealing with, detection will be
