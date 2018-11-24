@@ -28,7 +28,7 @@ import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
-import com.google.firebase.samples.apps.mlkit.R;
+//import com.google.firebase.samples.apps.mlkit.R;
 import com.google.firebase.samples.apps.mlkit.common.CameraImageGraphic;
 import com.google.firebase.samples.apps.mlkit.common.FrameMetadata;
 import com.google.firebase.samples.apps.mlkit.common.GraphicOverlay;
@@ -50,7 +50,7 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
     public static String scannedBarcode = "";
     public static final String EXTRA_MESSAGE = "com.google.firebase.samples.apps.mlkit.java.barcodescanning.MESSAGE";
 
-    private Context mContext;
+    public Context mContext;
 
     public BarcodeScanningProcessor(Context context) {
         // Note that if you know which format of barcode your app is dealing with, detection will be
@@ -97,7 +97,7 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
 
             if (!barcode.getRawValue().equals("") ) {
 
-                System.out.println("Got the number:" + barcode.getRawValue() + " Context: " + mContext);
+                System.out.println("Got the number:" + barcode.getRawValue() + " Context: " + mContext + " EXTRA_MESSAGE: " + EXTRA_MESSAGE) ;
 
                 //enter code to start activity
 
@@ -117,5 +117,6 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
     protected void onFailure(@NonNull Exception e) {
         Log.e(TAG, "Barcode detection failed " + e);
     }
+
 
 }

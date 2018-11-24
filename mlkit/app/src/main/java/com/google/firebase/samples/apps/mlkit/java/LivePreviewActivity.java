@@ -89,7 +89,7 @@ public final class LivePreviewActivity extends AppCompatActivity
       Log.d(TAG, "graphicOverlay is null");
     }
 
-    BarcodeScanningProcessor bsp = new BarcodeScanningProcessor(getApplicationContext);
+    //BarcodeScanningProcessor bsp = new BarcodeScanningProcessor(getApplicationContext());
 
       Spinner spinner = (Spinner) findViewById(R.id.spinner);
     List<String> options = new ArrayList<>();
@@ -178,7 +178,7 @@ public final class LivePreviewActivity extends AppCompatActivity
           break;
         case BARCODE_DETECTION:
           Log.i(TAG, "Using Barcode Detector Processor");
-          cameraSource.setMachineLearningFrameProcessor(new BarcodeScanningProcessor());
+          cameraSource.setMachineLearningFrameProcessor(new BarcodeScanningProcessor(getApplicationContext()));
           break;
         case IMAGE_LABEL_DETECTION:
           Log.i(TAG, "Using Image Label Detector Processor");
