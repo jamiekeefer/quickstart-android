@@ -21,7 +21,7 @@
         <activity android:name=".java.ChooserActivity" />
         <activity android:name=".kotlin.ChooserActivity" />
         <activity
-            android:name=".EntryChoiceActivity"
+            android:name=".java.LivePreviewActivity"
             android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
@@ -30,9 +30,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".java.LivePreviewActivity"
-            android:exported="true"></activity>
+        <!--<activity-->
+            <!--android:name=".java.LivePreviewActivity"-->
+            <!--android:exported="true"></activity>-->
         <activity
             android:name=".kotlin.LivePreviewActivity"
             android:exported="true" />

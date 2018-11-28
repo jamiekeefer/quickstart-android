@@ -96,7 +96,7 @@ public class BarcodeScanningProcessor extends VisionProcessorBase<List<FirebaseV
             System.out.println(barcode.getRawValue());
 
             if (!barcode.getRawValue().equals("") ) {
-
+                scannedBarcode = barcode.getRawValue();
                 System.out.println("Got the number:" + barcode.getRawValue() + " Context: " + mContext + " EXTRA_MESSAGE: " + EXTRA_MESSAGE) ;
 
                 //enter code to start activity

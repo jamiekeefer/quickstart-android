@@ -1,6 +1,7 @@
 package com.google.firebase.samples.apps.mlkit.java;
 
 import android.app.Activity;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.common.api.Response;
 import com.google.firebase.samples.apps.mlkit.R;
 import com.google.firebase.samples.apps.mlkit.java.barcodescanning.BarcodeScanningProcessor;
 
@@ -52,6 +54,7 @@ public class SendScannedBarcode extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
     }
 

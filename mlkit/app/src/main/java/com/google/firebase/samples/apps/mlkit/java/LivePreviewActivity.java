@@ -60,7 +60,7 @@ public final class LivePreviewActivity extends AppCompatActivity
         CompoundButton.OnCheckedChangeListener {
   private static final String FACE_DETECTION = "Face Detection";
   private static final String TEXT_DETECTION = "Text Detection";
-  private static final String BARCODE_DETECTION = "Barcode Detection";
+  private static final String BARCODE_DETECTION = "Scan Barcode";
   private static final String IMAGE_LABEL_DETECTION = "Label Detection";
   private static final String CLASSIFICATION_QUANT = "Classification (quantized)";
   private static final String CLASSIFICATION_FLOAT = "Classification (float)";
@@ -93,13 +93,13 @@ public final class LivePreviewActivity extends AppCompatActivity
 
       Spinner spinner = (Spinner) findViewById(R.id.spinner);
     List<String> options = new ArrayList<>();
-    options.add(FACE_CONTOUR);
-    options.add(FACE_DETECTION);
-    options.add(TEXT_DETECTION);
+//    options.add(FACE_CONTOUR);
+//    options.add(FACE_DETECTION);
+//    options.add(TEXT_DETECTION);
     options.add(BARCODE_DETECTION);
-    options.add(IMAGE_LABEL_DETECTION);
-    options.add(CLASSIFICATION_QUANT);
-    options.add(CLASSIFICATION_FLOAT);
+//    options.add(IMAGE_LABEL_DETECTION);
+//    options.add(CLASSIFICATION_QUANT);
+//    options.add(CLASSIFICATION_FLOAT);
     // Creating adapter for spinner
     ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, R.layout.spinner_style, options);
     // Drop down layout style - list view with radio button
